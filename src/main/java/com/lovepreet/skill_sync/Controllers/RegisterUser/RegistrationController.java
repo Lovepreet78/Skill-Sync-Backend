@@ -23,11 +23,11 @@ public class RegistrationController {
     @PostMapping("/register")
     public ResponseEntity<String> registerUser(@RequestBody RegistrationRequest request) {
         if (userRepository.findByUsername(request.getUsername()).isPresent()) {
-            return new ResponseEntity<>("User already exists",HttpStatus.IM_USED);
+            return new ResponseEntity<>("User already exists",HttpStatus.FORBIDDEN);
         }
-//        else if(request.getPassword().length() < 8 || request.getUsername().isEmpty() || request.getUsername().isBlank()) {
-//            return new ResponseEntity<>("Credential Constraint unsatisfied", HttpStatus.BAD_REQUEST);
-//        }
+        else if(request.getPassword().length() < 8 || request.getUsername().isEmpty() || request.getUsername().isBlank()) {
+            return new ResponseEntity<>("Credential Constraint unsatisfied", HttpStatus.FORBIDDEN);
+        }
 
         User newUser = new User();
 

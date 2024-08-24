@@ -30,7 +30,8 @@ public class UserProfile {
     private String profession;
     private String university;
     private String bio;
-    private boolean isAvailableToJoin;
+    private Boolean isAvailableToJoin;
     @ElementCollection
     private List<String> skills;
+    private String gender;
 }
