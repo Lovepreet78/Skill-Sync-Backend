@@ -60,7 +60,7 @@ public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Excepti
     http
             .csrf(AbstractHttpConfigurer::disable)
             .authorizeHttpRequests(registry -> {
-                registry.requestMatchers("/login","/register","/api/**").permitAll();
+                registry.requestMatchers("/login","/register").permitAll();
                 registry.anyRequest().authenticated();
             })
             .formLogin(formLogin ->
