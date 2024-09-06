@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.Optional;
 
 @Service
 public class InviteRequestService {
@@ -22,5 +23,21 @@ public class InviteRequestService {
     public List<InviteRequests> getReceivedInvites(Long receiverId) {
         return inviteRequestRepository.findByReceiverId(receiverId);
     }
+
+    public InviteRequests save(InviteRequests inviteRequests) {
+        return inviteRequestRepository.save(inviteRequests);
+    }
+
+    public Optional<InviteRequests> findById(Long userId) {
+        return inviteRequestRepository.findById(userId);
+    }
+
+//    public InviteRequests updateInvite(InviteRequests inviteRequests) {
+//        return inviteRequestRepository.save(inviteRequests);
+//    }
+
+//    public Optional<InviteRequests> saveInviteRequest(InviteRequests inviteRequest) {
+//        return Optional.of(inviteRequestRepository.save(inviteRequest));
+//    }
 }
 

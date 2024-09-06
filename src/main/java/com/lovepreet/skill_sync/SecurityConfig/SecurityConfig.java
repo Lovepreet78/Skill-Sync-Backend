@@ -36,25 +36,6 @@ public class SecurityConfig {
     @Autowired
     private PasswordEncoder passwordEncoder;
 
-
-
-//    @Bean
-//    public SecurityFilterChain securityFilterChain(HttpSecurity httpSecurity) throws Exception {
-//
-//
-//
-//        return httpSecurity
-//                .csrf(AbstractHttpConfigurer::disable)
-//                .authorizeHttpRequests(registry -> {
-//                    registry.requestMatchers("/login/**", "/register/**").permitAll();
-//                    registry.anyRequest().authenticated();
-//                })
-//                .httpBasic(Customizer.withDefaults())
-//                .formLogin(form -> form
-//                        .successHandler(customAuthenticationSuccessHandler)
-//                        .permitAll())
-//                .build();
-//    }
 @Bean
 public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
     http
@@ -67,58 +48,23 @@ public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Excepti
                     formLogin
                             .loginProcessingUrl("/login")
                             .successHandler((request, response, authentication) -> {
-                                // Custom logic for successful login
-                                CustomUserDetails userDetails = (CustomUserDetails) authentication.getPrincipal();
                                 response.setStatus(HttpServletResponse.SC_OK);
+                                CustomUserDetails userDetails = (CustomUserDetails) authentication.getPrincipal();
                                 response.getWriter().write("{\"username\":\"" + userDetails.getUsername() + "\", \"id\":" + userDetails.getId() + "}");
                             })
                             .failureHandler((request, response, exception) -> {
-                                // Custom logic for failed login
+
                                 response.setStatus(HttpServletResponse.SC_UNAUTHORIZED);
+
                                 response.getWriter().write("{\"error\":\"" + exception.getMessage() + "\"}");
                             })
+                            .permitAll()
+
             )
+            .logout(httpSecurityLogoutConfigurer -> httpSecurityLogoutConfigurer
+                    .deleteCookies("JSESSIONID"))
             .httpBasic(Customizer.withDefaults());
     return http.build();
 }
 
-
-//    @Bean
-//    public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
-//        http
-//                .csrf(AbstractHttpConfigurer::disable)
-//                .authorizeHttpRequests(registry -> {
-//                    registry.requestMatchers("/login").permitAll();
-//                    registry.anyRequest().authenticated();
-//                })
-//                .formLogin(formLogin ->
-//                        formLogin
-//                                .loginProcessingUrl("/login") // Endpoint for login
-//                                .successHandler((request, response, authentication) -> {
-//                                    // Custom logic for successful login
-//                                    response.setStatus(HttpServletResponse.SC_OK);
-//                                    response.getWriter().write("{\"username\":\"" + authentication.getName() + "\"}");
-//                                })
-//                                .failureHandler((request, response, exception) -> {
-//                                    // Custom logic for failed login
-//                                    response.setStatus(HttpServletResponse.SC_UNAUTHORIZED);
-//                                    response.getWriter().write("{\"error\":\"" + exception.getMessage() + "\"}");
-//                                })
-//                )
-//                .httpBasic(Customizer.withDefaults()); // This can be removed if you are using form login
-//        return http.build();
-//    }
-
-    @Bean
-    public UserDetailsService userDetailsService() {
-        return myUserDetailService;
-    }
-
-    @Bean
-    public AuthenticationProvider authenticationProvider() {
-        DaoAuthenticationProvider authProvider = new DaoAuthenticationProvider();
-        authProvider.setUserDetailsService(userDetailsService());
-        authProvider.setPasswordEncoder(passwordEncoder);
-        return authProvider;
-    }
 }
