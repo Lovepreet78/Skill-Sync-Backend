@@ -22,7 +22,9 @@ public class MyUserDetailService implements UserDetailsService {
     @Override
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
         Optional<User> myUserOptional = myUserRepository.findByUsername(username);
+        System.out.println("called : "+username);
         if (myUserOptional.isPresent()) {
+
             User user = myUserOptional.get();
             return new CustomUserDetails(user);
         } else {
