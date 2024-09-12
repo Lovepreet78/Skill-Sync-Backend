@@ -38,15 +38,11 @@ public class InviteRequestController {
         return ResponseEntity.ok(inviteRequestService.save(inviteRequests));
     }
 
-//    @PutMapping("/update")
-//    public ResponseEntity<InviteRequests> updateInvite(@RequestBody InviteRequests inviteRequests) {
-//        InviteRequests updatedInvite = inviteRequestService.updateInvite(inviteRequests);
-//        return ResponseEntity.ok(updatedInvite);
-//    }
+
 
     @PutMapping("/update")
     public InviteRequests updateInvite(@RequestBody InviteRequests inviteRequest) {
-        Optional<InviteRequests> existingInvite = inviteRequestService.findById(inviteRequest.getUserId());
+        Optional<InviteRequests> existingInvite = inviteRequestService.findById(inviteRequest.getInviteId());
 
 
         if (existingInvite.isPresent()) {
@@ -54,7 +50,13 @@ public class InviteRequestController {
             inviteToUpdate.setStatus(inviteRequest.getStatus());
             return inviteRequestService.save(inviteToUpdate);
         } else {
-            throw new IllegalArgumentException("Invite not found for id: " + inviteRequest.getUserId());
+            throw new IllegalArgumentException("Invite not found for id: " + inviteRequest.getInviteId());
         }
     }
+
+    @DeleteMapping("/delete")
+    public void deleteInvite(@RequestBody InviteRequests inviteRequest) {
+        inviteRequestService.deleteByInviteId(inviteRequest);
+    }
+
 }

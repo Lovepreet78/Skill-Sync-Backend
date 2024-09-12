@@ -16,7 +16,7 @@ import java.time.LocalDateTime;
 public class InviteRequests {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
-    private Long userId;
+    private Long inviteId;
     // Storing the user id as sender and receiver
     private Long senderId;
     private Long receiverId;

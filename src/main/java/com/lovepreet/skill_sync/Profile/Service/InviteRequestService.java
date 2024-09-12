@@ -32,12 +32,9 @@ public class InviteRequestService {
         return inviteRequestRepository.findById(userId);
     }
 
-//    public InviteRequests updateInvite(InviteRequests inviteRequests) {
-//        return inviteRequestRepository.save(inviteRequests);
-//    }
+    public void deleteByInviteId(InviteRequests inviteRequest) {
+        inviteRequestRepository.delete(inviteRequest);
+    }
 
-//    public Optional<InviteRequests> saveInviteRequest(InviteRequests inviteRequest) {
-//        return Optional.of(inviteRequestRepository.save(inviteRequest));
-//    }
 }
 
