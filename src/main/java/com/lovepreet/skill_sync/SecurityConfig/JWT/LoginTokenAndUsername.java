@@ -1,4 +1,4 @@
-package com.lovepreet.skill_sync.JWT;
+package com.lovepreet.skill_sync.SecurityConfig.JWT;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;

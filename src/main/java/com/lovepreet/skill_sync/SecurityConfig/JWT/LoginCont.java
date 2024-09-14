@@ -1,6 +1,6 @@
-package com.lovepreet.skill_sync.JWT;
+package com.lovepreet.skill_sync.SecurityConfig.JWT;
 
-import com.lovepreet.skill_sync.SecurityConfig.User;
+import com.lovepreet.skill_sync.SecurityConfig.user.User;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;

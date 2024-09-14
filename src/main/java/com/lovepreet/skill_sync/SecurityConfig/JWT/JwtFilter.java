@@ -1,7 +1,7 @@
-package com.lovepreet.skill_sync.JWT;
+package com.lovepreet.skill_sync.SecurityConfig.JWT;
 
 
-import com.lovepreet.skill_sync.SecurityConfig.MyUserDetailService;
+import com.lovepreet.skill_sync.SecurityConfig.user.MyUserDetailService;
 import jakarta.servlet.FilterChain;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServletRequest;

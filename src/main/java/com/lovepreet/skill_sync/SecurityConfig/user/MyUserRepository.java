@@ -1,4 +1,4 @@
-package com.lovepreet.skill_sync.SecurityConfig;
+package com.lovepreet.skill_sync.SecurityConfig.user;
 
 
 import org.springframework.data.jpa.repository.JpaRepository;

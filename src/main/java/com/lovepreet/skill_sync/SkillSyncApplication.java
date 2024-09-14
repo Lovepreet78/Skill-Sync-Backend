@@ -1,11 +1,9 @@
 package com.lovepreet.skill_sync;
 
-import com.lovepreet.skill_sync.SecurityConfig.MyUserDetailService;
+import com.lovepreet.skill_sync.SecurityConfig.user.MyUserDetailService;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.annotation.Bean;
-import org.springframework.security.authentication.AuthenticationProvider;
-import org.springframework.security.authentication.dao.DaoAuthenticationProvider;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;

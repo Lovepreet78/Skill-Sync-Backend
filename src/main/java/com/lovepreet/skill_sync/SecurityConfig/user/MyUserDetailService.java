@@ -1,16 +1,13 @@
-package com.lovepreet.skill_sync.SecurityConfig;
+package com.lovepreet.skill_sync.SecurityConfig.user;
 
 import com.lovepreet.skill_sync.SecurityConfig.AuthController.CustomUserDetails;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
 
-import java.util.Arrays;
 import java.util.Optional;
-import java.util.stream.Collectors;
 
 
 @Service

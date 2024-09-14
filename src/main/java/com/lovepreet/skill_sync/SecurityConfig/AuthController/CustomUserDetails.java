@@ -1,6 +1,6 @@
 package com.lovepreet.skill_sync.SecurityConfig.AuthController;
 
-import com.lovepreet.skill_sync.SecurityConfig.User;
+import com.lovepreet.skill_sync.SecurityConfig.user.User;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;

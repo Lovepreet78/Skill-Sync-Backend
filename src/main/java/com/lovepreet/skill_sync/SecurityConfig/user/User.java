@@ -1,10 +1,10 @@
-package com.lovepreet.skill_sync.SecurityConfig;
+package com.lovepreet.skill_sync.SecurityConfig.user;
 
 import jakarta.persistence.*;
 import lombok.*;
 
 import java.util.Set;
-
+@Table(name = "app_user")
 @Entity
 @Getter
 @Setter

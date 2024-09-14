@@ -1,4 +1,4 @@
-package com.lovepreet.skill_sync.JWT;
+package com.lovepreet.skill_sync.SecurityConfig.JWT;
 
 import io.jsonwebtoken.Claims;
 import io.jsonwebtoken.Jwts;
