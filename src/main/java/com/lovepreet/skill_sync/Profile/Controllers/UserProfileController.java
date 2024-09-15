@@ -2,9 +2,12 @@ package com.lovepreet.skill_sync.Profile.Controllers;
 
 import com.lovepreet.skill_sync.Profile.Model.UserProfile;
 import com.lovepreet.skill_sync.Profile.Service.UserProfileService;
+import com.lovepreet.skill_sync.Profile.UploadImage;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.multipart.MultipartFile;
 
 import java.util.List;
 import java.util.Optional;
@@ -15,17 +18,31 @@ public class UserProfileController {
 
     @Autowired
     private UserProfileService userProfileService;
-
+    @Autowired
+    private UploadImage uploadImage;
     // Create or update a user profile
     @PostMapping("/save")
-    public ResponseEntity<UserProfile> saveUserProfile(@RequestBody UserProfile userProfile) {
+    public ResponseEntity<UserProfile> saveUserProfile(@RequestPart("userProfile") UserProfile userProfile,
+                                                       @RequestPart(value = "profileImage", required = false) MultipartFile profileImage) {
 
-        UserProfile savedProfile = userProfileService.saveUserProfile(userProfile);
-        if(savedProfile != null) {
-            return ResponseEntity.ok(savedProfile);
-        }
-        else{
-            return ResponseEntity.notFound().build();
+        try {
+            // Check if an image is provided
+            if (profileImage != null && !profileImage.isEmpty()) {
+                // Call the method to upload the image to FreeImage API and get the URL
+                String imageUrl = uploadImage.uploadImageToFreeImageAPI(profileImage);
+                userProfile.setImageUrl(imageUrl); // Set the image URL in the UserProfile
+            }
+
+            // Save the user profile
+            UserProfile savedProfile = userProfileService.saveUserProfile(userProfile);
+            if (savedProfile != null) {
+                return ResponseEntity.ok(savedProfile);
+            } else {
+                return ResponseEntity.notFound().build();
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).build();
         }
 
     }
