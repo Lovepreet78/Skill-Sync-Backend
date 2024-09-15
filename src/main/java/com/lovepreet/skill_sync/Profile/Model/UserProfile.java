@@ -34,4 +34,5 @@ public class UserProfile {
     @ElementCollection
     private List<String> skills;
     private String gender;
+    private String imageUrl;
 }
